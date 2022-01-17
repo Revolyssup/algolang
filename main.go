@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	bt := tree.NewBinary(1, 1)
+	bt := tree.NewBinary(1, tree.INT)
 	bt.Root.InsertLeft(12)
 	bt.Root.InsertRight(12)
 	bt.Root.Left.InsertLeft(15)

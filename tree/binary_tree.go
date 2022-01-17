@@ -5,15 +5,20 @@ import (
 	"reflect"
 )
 
+const (
+	INT    = reflect.Int
+	STRING = reflect.String
+)
+
 type Binary struct {
 	Root *Node
-	t    reflect.Type
+	t    reflect.Kind
 }
 type Node struct {
 	Left  *Node
 	Right *Node
 	Value interface{}
-	t     reflect.Type
+	t     reflect.Kind
 }
 
 func (node *Node) InsertLeft(val interface{}) error {
@@ -96,13 +101,12 @@ func (bt *Binary) Traverse(fn NodeCallbackFn, order int) error {
 	return bt.Root.Traverse(fn, order)
 }
 
-func NewBinary(value interface{}, dtype interface{}) *Binary {
-	t := reflect.TypeOf(dtype)
+func NewBinary(value interface{}, dtype reflect.Kind) *Binary {
 	return &Binary{
-		t: t,
+		t: dtype,
 		Root: &Node{
 			Value: value,
-			t:     t,
+			t:     dtype,
 		},
 	}
 }
